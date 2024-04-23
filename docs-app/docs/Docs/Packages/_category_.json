@@ -1,0 +1,8 @@
+{
+  "label": "Package Management",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Docs for packaing and distributing your code."
+  }
+}

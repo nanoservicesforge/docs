@@ -77,16 +77,22 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'philosophySidebar',
+            sidebarId: 'docsSidebar',
             position: 'left',
-            label: 'Philosophy',
+            label: 'Docs',
           },
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
-          },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'philosophySidebar',
+          //   position: 'left',
+          //   label: 'Philosophy',
+          // },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'tutorialSidebar',
+          //   position: 'left',
+          //   label: 'Tutorial',
+          // },
           // {to: '/blog', label: 'Blog', position: 'left'}, // Commented out to remove the blog link. We might want this in the future.
           {
             href: 'https://github.com/nanoservicesforge',

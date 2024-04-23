@@ -1,0 +1,8 @@
+{
+  "label": "IO-Messaging",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Docs for sending and recieving messages between servers"
+  }
+}
