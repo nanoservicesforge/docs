@@ -1,24 +1,42 @@
+# NanoForge
 
-# Quickstart
+This Nanoservices package manager is built on top of Docker which means it is supported by all major CI pipelines.
+Authentication, caching and version control is handled by Docker, and all major cloud providers support private registries.
 
-Nanoservices package manager is built on top of Docker for distributing code. This means that the package manager is
-supported by all major CI pipelines, authentication, caching and version control is handled by Docker, and all major
-cloud providers support private registeries.
+## Prerequisites
 
-To install the package manager `NanoForge` you will need `Rust Cargo` for compilation of the tool and `python3` to
-run the install scripts. You can install the tool by running the following command:
+1. Docker must be installed and running
+1. Rust must be installed because the Rust tool `cargo` is needed for compilation
+1. `python3` must be installed
 
-**Note:** The tool does not have windows install scripts yet but windows developers can visit the 
-[GitHub repository](https://github.com/nanoservicesforge/NanoForge) to download and build from source
-to put the binary into the directory to be called.
+## Installation
+
+To install the `NanoForge`, run the following command:
+
+> ### Windows Users
+>
+> There is no windows install script yet, but windows developers can clone the [GitHub repository](https://github.com/nanoservicesforge/NanoForge) and build from source.  Add the binary into an appropriate directory in your `$PATH`.
+
+On *NIX machines, you can run the installer from `wget`:
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/nanoservicesforge/NanoForge/main/scripts/install.py | python3
 ```
 
-The tool uses `sudo` commands to insert the compiled tool into the `bin` for execution so you might have to
-input your password to complete the installation process. Once the tool is installed, you will need a Rust
-project to use the tool. To get a quickstart create the following project:
+Or instead, if you have `curl` installed, then run:
+
+```bash
+curl -s https://raw.githubusercontent.com/nanoservicesforge/NanoForge/main/scripts/install.py | python3
+```
+
+On *NIX machines, the installation process uses the `sudo` command to insert the compiled tool into your `bin` path, so
+you might have to input your password to complete the installation process.
+
+Once the tool is installed, you will need to create a Rust project upon which this tool can act.
+
+## Quick Start
+
+To quick start a project:
 
 ```bash
 cargo new nanoforge-test
@@ -38,10 +56,14 @@ We can then download the docker package and configure the `Cargo.toml` file by r
 ```bash
 nanoforge prep
 ```
-`NanoForge` will pull the `maxwellflitton/nan-one` Docker image, unpack and decompress 
-the files in that image, and store them in the `.nanoservices_cache` directory. `NanoForge` will then calculate
-the relative path of the `Cargo.toml` file declaring the nanoservice, and the downloaded code, and add this to
-the `dependencies` section of the `Cargo.toml` resulting in the `dependencies` section below:
+
+The `nanoforge` tool now performs the following steps:
+
+1. It pulls the Docker images (just `maxwellflitton/nan-one` in this case)
+1. Unpacks and decompresses the image files, then stores them in the `.nanoservices_cache` directory
+1. Calculates the relative path of both the `Cargo.toml` file declaring the nanoservice and the downloaded code, then adds this to the `dependencies` section of the `Cargo.toml`
+
+This results in the following update to the `[dependencies.nan-one]` section of `Cargo.toml`:
 
 ```toml
 [dependencies.nan-one]
