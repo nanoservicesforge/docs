@@ -33,7 +33,12 @@ prod_image = "maxwellflitton/nan-one"
 entrypoint = "."
 ```
 
-This defintion means that `NanoForge` will pull the `maxwellflitton/nan-one` Docker image, unpack and decompress 
+We can then download the docker package and configure the `Cargo.toml` file by running the following command:
+
+```bash
+nanoforge prep
+```
+`NanoForge` will pull the `maxwellflitton/nan-one` Docker image, unpack and decompress 
 the files in that image, and store them in the `.nanoservices_cache` directory. `NanoForge` will then calculate
 the relative path of the `Cargo.toml` file declaring the nanoservice, and the downloaded code, and add this to
 the `dependencies` section of the `Cargo.toml` resulting in the `dependencies` section below:
