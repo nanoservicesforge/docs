@@ -33,7 +33,7 @@ prod_image = "maxwellflitton/nan-one"
 entrypoint = "."
 ```
 
-We can then download and configure the `Cargo.toml` file by running the following command:
+We can then download the docker package and configure the `Cargo.toml` file by running the following command:
 
 ```bash
 nanoforge prep
