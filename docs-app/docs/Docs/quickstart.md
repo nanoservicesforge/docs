@@ -8,6 +8,10 @@ cloud providers support private registeries.
 To install the package manager `NanoForge` you will need `Rust Cargo` for compilation of the tool and `python3` to
 run the install scripts. You can install the tool by running the following command:
 
+**Note:** The tool does not have windows install scripts yet but windows developers can visit the 
+[GitHub repository](https://github.com/nanoservicesforge/NanoForge) to download and build from source
+to put the binary into the directory to be called.
+
 ```bash
 wget -qO- https://raw.githubusercontent.com/nanoservicesforge/NanoForge/main/scripts/install.py | python3
 ```
