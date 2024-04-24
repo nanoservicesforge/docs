@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Nanoservices',
   tagline: 'Power of microservices in one binary',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/nanoservices.jpeg',
 
   // Set the production url of your site here
   url: 'https://nanoservices.io',
@@ -67,20 +67,26 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/nanoservices.jpeg',
       navbar: {
         title: 'Nanoservices',
         logo: {
           alt: 'Nanoservices Logo',
-          src: 'img/logo.svg',
+          src: 'img/nanoservices.jpeg',
         },
         items: [
           {
             type: 'docSidebar',
             sidebarId: 'docsSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'Docs'
           },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'philosophySidebar',
+          //   position: 'left',
+          //   label: 'Philosophy',
+          // },
           // {
           //   type: 'docSidebar',
           //   sidebarId: 'philosophySidebar',
@@ -108,7 +114,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Quickstart',
                 to: '/docs/intro',
               },
             ],
@@ -133,10 +139,10 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
+              // {
+              //   label: 'Blog',
+              //   to: '/blog',
+              // },
               {
                 label: 'GitHub',
                 href: 'https://github.com/nanoservicesforge/NanoForge',

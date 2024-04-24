@@ -4,35 +4,37 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Develop as a Nanoservice',
+    Svg: require('@site/static/img/api.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+       Nanoservices are developed as small microservices, inheriting all their advantages,
+        such as isolated code and comprehensive testing environments.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Use Docker as a private crate registry',
+    Svg: require('@site/static/img/structs.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Reference docker images in your cargo.toml for our package manager to download and 
+        configure for your build. 
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Compile into single binary',
+    Svg: require('@site/static/img/compile.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Compiling into a single binary enhances performance by allowing functions to be 
+      called in-memory, reducing latency. This approach simplifies deployment, streamlines 
+      version control, and minimizes dependency conflicts.
       </>
     ),
   },
+  
 ];
 
 function Feature({Svg, title, description}) {
