@@ -38,7 +38,6 @@ We can then download the docker package and configure the `Cargo.toml` file by r
 ```bash
 nanoforge prep
 ```
-
 `NanoForge` will pull the `maxwellflitton/nan-one` Docker image, unpack and decompress 
 the files in that image, and store them in the `.nanoservices_cache` directory. `NanoForge` will then calculate
 the relative path of the `Cargo.toml` file declaring the nanoservice, and the downloaded code, and add this to
