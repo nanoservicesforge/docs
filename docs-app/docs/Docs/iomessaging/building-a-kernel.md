@@ -66,7 +66,7 @@ create_contract_handler!(
 );
 ```
 
-The first name (`TestContractHandler`) in the list is the handler name.
+The first name (`TestContractHandler`) in the list is the struct name for handling contract serialization.
 The subsequent contract `struct`s are then bound to this handler.
 
 We can now reference the handler in both the server and the client.
