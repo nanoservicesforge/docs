@@ -1,7 +1,7 @@
 
 # Declaring Nanoservices
 
-You can declare one or more nanoservices in the `Cargo.toml` file with the following outline:
+You can declare one or more nanoservices in the `Cargo.toml` file with the parameters:
 
 ```toml
 [nanoservices.nan-four]
@@ -12,29 +12,24 @@ features = []
 local = false
 ```
 
-### Docker Images
+## Configuration Parameters
 
-At this point in time the `dev_image` is used and the `prod_image` is ignored, we are still working out the best way to
-handle multiple tags. Both the `dev_image` and `prod_image` need to be declared to work but we might be swapping over
-to just `image` and having different commandline inputs for the tags in the future. We will announce if and when this
-happens.
+| Parameter | Value | Default | Required? | Description
+|---|---|---|:-:|---|
+| `dev_image` | Docker image name | N/A | ✅ | The Docker image to be used for deployment to a development environment
+| `prod_image` | Docker image name | N/A | ✅ | The Docker image to be used for deployment to a production environment
+| `entrypoint` | Directory name | N/A | ✅ | The nanoservice's root directory within the Docker image
+| `features` | List of feature names | `[]` | | The feature list of the build you are pointing to via `entrypoint`
+| `local` | Boolean | `false` | | When set to `true`, the package manager does not pull the Docker image from a registry; instead, it uses the locally built image
 
-### entrypoint
+Although both the `dev_image` and `prod_image` parameters are required, we have not yet worked out the best way to handle their difference.
+So for the time being, only the `dev_image` parameter value is acted upon, and the `prod_image` parameter value is ignored.
 
-This is needed and entrypoint of the nanoservice (where the terminal has to point inside for the build).
+We are considering replacing these two parameters with a single `image` parameter that is then used in conjunction with command line flags.
+Since this will be a breaking change, its implementation will be announced in advance.
 
-### features
+## Aliases
 
-This is optional and if not provided is just assumed that there are no features. These features will correlated to the
-features of the build you are pointing to via the `entrypoin`.
+We are also planning to implement alias names for nanoservices.
 
-### local
-
-This is optional and if not provided is just assumed that the nanoservice is not `local`. If you set `local` to `true`
-then the package manager does not try and pull the image from a registry, instead, it tries to use the local built
-image.
-
-### Aliases
-
-We will be working on aliases soon for nanoservices so you can handle multiple nanoservices with the same package name
-in their `Cargo.toml` files or multiple versions of the same nanoservice. This is not implemented yet but will be soon.
+The use of an alias name will allow you to handle both multiple nanoservices with the same package name, and multiple versions of the same package within a single `Cargo.toml` file.
