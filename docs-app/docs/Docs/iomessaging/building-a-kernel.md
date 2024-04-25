@@ -1,7 +1,6 @@
-
 # Building a Kernel
 
-When it comes to building our kernel cargo workspace, we have the following `Cargo.toml` file:
+In order to build an IO Messaging kernel, we start with at least the following entries in the `Cargo.toml` file:
 
 ```toml
 [package]
@@ -19,24 +18,24 @@ bytes = "1.6.0"
 futures = "0.3.30"
 ```
 
-We then in our `src/lib.rs` file import the following:
+Then, in `src/lib.rs`, bring the following crates into scope:
 
 ```rust
-use nanoservices_utils::create_contract_handler;
-use nanoservices_utils::errors::{NanoServiceError, NanoServiceErrorStatus};
+use futures::{sink::SinkExt, StreamExt};
+use nanoservices_utils::{
+    create_contract_handler,
+    errors::{NanoServiceError, NanoServiceErrorStatus},
+    networking::codec::BincodeCodec
+};
 use serde::{Deserialize, Serialize};
 use tokio::net::TcpStream;
 use tokio_util::codec::Framed;
-use nanoservices_utils::networking::codec::BincodeCodec;
-use futures::sink::SinkExt;
-use futures::StreamExt;
 ```
 
-We will be relying on some serialization and `tokio` framing but do not worry, we will not be writing any of the code
-ourselves. The `nanoservices-utils` macros will generate all the code we need to handle the serialization and sending
-of contracts.
+A set of macros in `nanoservices-utils` will generate all the code we need to handle the serialization and sending of contracts.
+This saves us the trouble of having to write the serialization or `tokio` framing code ourselves.
 
-We can then define the contracts that we want to send between client and server with the code below:
+The contracts sent between the client and the server are simply `struct`s that can be compared and (de)serialized:
 
 ```rust
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
@@ -54,16 +53,20 @@ pub struct ContractTwo {
 }
 ```
 
-We can do whatever we want with our structs, but here we can see that we want to send some input data, and then either have
-a result or an error. We can then create a handler for these contracts with the following macro:
+These `struct`s can be defined in whatever way we require.
+In this particular example, each contract sends input data of some type and expects either a result or an error in response.
+
+We then define a handler for these contracts with the following macro:
 
 ```rust
 create_contract_handler!(
     TestContractHandler,
-    ContractOne, 
+    ContractOne,
     ContractTwo
 );
 ```
 
-Here, we are essentially creating the `TestContractHandler` but you can define whatever you want for the handler name. The
-following contracts are then bound to the handler. We can now reference the handler in the server or client.
+The first name (`TestContractHandler`) in the list is the handler name.
+The subsequent contract `struct`s are then bound to this handler.
+
+We can now reference the handler in both the server and the client.
