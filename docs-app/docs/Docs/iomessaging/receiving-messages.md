@@ -1,6 +1,6 @@
 # Building a Server
 
-When it comes to building the server, our `Cargo.toml` file will have the same dependencies as the kernel as seen below:
+In order to build a server, our `Cargo.toml` file must have the same shared dependencies as the `Cargo.toml` used by the kernel:
 
 ```toml
 [package]
@@ -19,16 +19,17 @@ bytes = "1.6.0"
 futures = "0.3.30"
 ```
 
-And in our `src/main.rs` file we will import the following:
+In `src/main.rs`, bring the following crates into scope:
 
 ```rust
-use nanoservices_utils::errors::{NanoServiceError, NanoServiceErrorStatus};
-use nanoservices_utils::register_contract_routes;
-use nanoservices_utils::networking::codec::BincodeCodec;
-use tokio::net::TcpListener;
+use futures::{sink::SinkExt, StreamExt};
+use nanoservices_utils::{
+    create_contract_handler,
+    errors::{NanoServiceError, NanoServiceErrorStatus},
+    networking::codec::BincodeCodec
+};
+use tokio::net::TcpStream;
 use tokio_util::codec::Framed;
-use futures::sink::SinkExt;
-use futures::StreamExt;
 
 use kernel::{
     TestContractHandler,
@@ -37,8 +38,8 @@ use kernel::{
 };
 ```
 
-We are now ready to build some functions that handle particular contracts that we want to accept from the client. For our example,
-the functions take the form below:
+We are now ready to build some functions that handle the various contracts arriving from the client.
+For our example, the functions take the form below:
 
 ```rust
 async fn handle_contract_one(mut contract: ContractOne) -> Result<ContractOne, NanoServiceError> {
@@ -72,15 +73,16 @@ Now we can map our contracts to the functions we have created with the following
 
 ```rust
 register_contract_routes!(
-    TestContractHandler,
-    handle_contract_routes,
-    ContractOne => handle_contract_one,
-    ContractTwo => handle_contract_two
+    TestContractHandler,                  // Struct handling contract serialization
+    handle_contract_routes,               // Generate an overall contract handler function of this name
+    ContractOne => handle_contract_one,   // Map a contract struct to existing handler function
+    ContractTwo => handle_contract_two    // Map a contract struct to existing handler function
 );
 ```
-Here, we are using the `TestContractHandler` struct we created in the kernel to handle the serialixation of the contract
-being sent to the server. We then express that we want the handle function to be called `handle_contract_routes`, and
-this `handle_contract_routes` maps the contracts to the functions we have created.
+
+Here, the serialized contracts are handled buy the `TestContractHandler` `struct` created in the kernel.
+
+We then declare that we want to generate a function called `handle_contract_routes` that maps the individual contract `struct`s to the handler functions we've just defined.
 
 Finally, we can start the server with the following code:
 
