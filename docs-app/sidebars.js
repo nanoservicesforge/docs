@@ -38,7 +38,7 @@ const sidebars = {
       items: [
         'Docs/iomessaging/introduction',
         'Docs/iomessaging/building-a-kernel',
-        'Docs/iomessaging/recieving-messages',
+        'Docs/iomessaging/receiving-messages',
         'Docs/iomessaging/sending-messages',
         'Docs/iomessaging/roadmap',
       ]
