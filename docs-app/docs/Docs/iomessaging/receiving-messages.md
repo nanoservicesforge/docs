@@ -24,11 +24,11 @@ In `src/main.rs`, bring the following crates into scope:
 ```rust
 use futures::{sink::SinkExt, StreamExt};
 use nanoservices_utils::{
-    create_contract_handler,
+    register_contract_routes,
     errors::{NanoServiceError, NanoServiceErrorStatus},
     networking::codec::BincodeCodec
 };
-use tokio::net::TcpStream;
+use tokio::net::TcpListener;
 use tokio_util::codec::Framed;
 
 use kernel::{
