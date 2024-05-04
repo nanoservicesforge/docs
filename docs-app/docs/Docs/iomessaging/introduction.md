@@ -14,5 +14,10 @@ These `struct`s are then referenced by both the client and server as shown in th
 
 ![IO Messaging Diagram](/img/contract_structs_overview.png)
 
-IO messaging eliminates the need for a Web framework to act as the communication layer between nanoservices.
-Instead, `Tokio` TCP is used for message routing.
+IO messaging eliminates the need for a Web framework to act as the communication layer between nanoservices. Instead, `Tokio` TCP is used for message routing.
+
+The working example of the messaging can be found in the link below:
+
+```
+https://github.com/nanoservicesforge/example-tcp-messaging
+```
