@@ -35,7 +35,10 @@ const sidebars = {
       label: 'Building a Nanoservice',
       items: [
         'docs/building/introduction',
-        'docs/building/create'
+        'docs/building/create',
+        'docs/building/kernel_and_contracts',
+        'docs/building/core',
+        'docs/building/single_binary',
       ]
     },
     {

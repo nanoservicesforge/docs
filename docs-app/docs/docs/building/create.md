@@ -48,3 +48,5 @@ This command will generate a new nanoservice project with the following structur
             ├── main.rs
             └── routing.rs
 ```
+
+The README.md contains brief instructions on how to build and run the nanoservice, and we will be referring to this file throughout the guide.
