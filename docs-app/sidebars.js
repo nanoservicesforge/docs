@@ -35,6 +35,7 @@ const sidebars = {
       label: 'Building a Nanoservice',
       items: [
         'docs/building/introduction',
+        'docs/building/create'
       ]
     },
     {
