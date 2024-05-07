@@ -34,12 +34,14 @@ const sidebars = {
       type: 'category',
       label: 'Building a Nanoservice',
       items: [
-        'docs/building/introduction',
         'docs/building/create',
+        'docs/building/introduction',
         'docs/building/kernel_and_contracts',
         'docs/building/core',
-        'docs/building/single_binary',
-        'docs/building/http'
+        // 'docs/building/single_binary',
+        'docs/building/http' // servers
+        // packaging a nanoservice
+        // installing a nanoservice
       ]
     },
     {
