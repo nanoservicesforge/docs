@@ -24,4 +24,5 @@ to describe our system we had in production.
 You may see some macros when looking at the TCP server code. Please visit the messaging part of the docs for more information on binary communication
 and routing of data contracts.
 
-Now we have covered these concepts, let's explore our nanoservice.
+Now we have covered these concepts, let's explore our nanoservice. A good starting point is the workspace that all over workspaces reference, which is
+the kernel and it's data contracts.

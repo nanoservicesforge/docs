@@ -39,7 +39,9 @@ const sidebars = {
         'docs/building/kernel_and_contracts',
         'docs/building/core',
         // 'docs/building/single_binary',
-        'docs/building/http' // servers
+        'docs/building/http', // servers
+        'docs/building/packaging',
+        'docs/building/installing',
         // packaging a nanoservice
         // installing a nanoservice
       ]

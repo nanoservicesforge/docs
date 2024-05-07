@@ -9,18 +9,16 @@ core
     └── lib.rs
 ```
 
-The `Cargo.toml` file contains the dependencies for the `core` module. The `lib.rs` file contains the main logic for the nanoservice. Notice that we are using `lib.rs` as the main file for the `core` module. This is because the `core` module will be compiled into a library that can be used by the clients and servers. 
-
-The `lib.rs` file imports the `nanoservices_utils` crate, which contains the error handling, and the `kernel` crate, which contains the contracts that are used to communicate between the clients and servers. We then define the core functionality in the `handle_contract_work` function. This function takes a `CalcWork` contract as input, performs the calculation based on the work type, and returns the result.
+As the program grows you will tend to structure your program over multiple files, however, for the example, we will keep everything in `lib.rs`. The `lib.rs` file will contain the following code:
 
 ```rust
-/// Performs a calculation based on the work type and returns the result.
-/// 
-/// # Arguments
-/// * `contract` - The contract to perform the calculation on.
-/// 
-/// # Returns
-/// The contract with the result of the calculation.
+use nanoservices_utils::errors::{NanoServiceError, NanoServiceErrorStatus};
+use kernel::{
+    CalcWork,
+    WorkType,
+    Echo
+};
+
 pub async fn handle_contract_work(mut contract: CalcWork) -> Result<CalcWork, NanoServiceError> {
     let data1 = contract.input_data1;
     let data2 = contract.input_data2;
@@ -39,4 +37,12 @@ pub async fn handle_contract_work(mut contract: CalcWork) -> Result<CalcWork, Na
     }
     Ok(contract)
 }
+
+pub async fn handle_contract_echo(mut contract: Echo) -> Result<Echo, NanoServiceError> {
+    contract.name = format!("Hello: {}", contract.name);
+    Ok(contract)
+}
 ```
+
+Seeing as the functions are public, another program can compile the `core` as a dependency and directly call these functions. To see this in action,
+we can move onto the servers.
