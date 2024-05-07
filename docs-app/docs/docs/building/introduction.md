@@ -21,4 +21,7 @@ Our system ended up like the following diagram:
 The dotted line is the binary boundary. Here, we can see that there are multiple layers to a nanoservice. It has changed a bit since this diagram was made
 to describe our system we had in production. 
 
+You may see some macros when looking at the TCP server code. Please visit the messaging part of the docs for more information on binary communication
+and routing of data contracts.
+
 Now we have covered these concepts, let's explore our nanoservice.
