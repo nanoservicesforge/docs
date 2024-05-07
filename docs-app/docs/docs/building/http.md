@@ -16,6 +16,13 @@ For the `actix-web` example, we need to add the following dependencies to the `C
 [dependencies]
 actix-web = "4.4.0"
 actix-cors = "0.7.0"
+env_logger = "0.11.3"
+serde = { version = "1.0.200", features = ["derive"] }
+serde_json = "1.0.108"
+tokio = { version = "1.37.0", features = ["macros", "rt-multi-thread"] }
+nanoservices-utils = { version = "0.1.2", features = ["actix"] }
+kernel = { path = "../../kernel" }
+core = { path = "../../core" }
 ```
 
 The `src/routing.rs` file contains the routing logic for the server. It imports the `actix-web` crate and the `nanoservices_utils` crate, and then the kernel and core crates. 
@@ -78,6 +85,14 @@ For the `axum` example, we need to add the following dependencies to the `Cargo.
 ```toml
 [dependencies]
 axum = { version = "0.7.5", features = [] }
+tracing-subscriber = "0.3.18" 
+env_logger = "0.11.3"
+serde = { version = "1.0.200", features = ["derive"] }
+serde_json = "1.0.108"
+tokio = { version = "1.37.0", features = ["macros", "rt-multi-thread"] }
+nanoservices-utils = { version = "0.1.2", features = ["actix"] }
+kernel = { path = "../../kernel" }
+core = { path = "../../core" }
 ```
 
 This has the same structure as the `actix-web` example, with the following files, and the same logic in the `routing.rs` file. We create our two wrapper functions that handle the contract work and the contract echo. Notice this time we are using the `Json` macro to extract the contract from the request, and returning a tuple with the `StatusCode` and the `Json` contract. 
