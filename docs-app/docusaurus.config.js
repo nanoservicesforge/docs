@@ -72,7 +72,7 @@ const config = {
         title: 'Nanoservices',
         logo: {
           alt: 'Nanoservices Logo',
-          src: 'img/nanoservices.jpeg',
+          src: 'img/iso_logo.png',
         },
         items: [
           {
