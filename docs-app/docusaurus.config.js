@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Nanoservices',
   tagline: 'Power of microservices in one binary',
-  favicon: 'img/iso_logo.png',
+  favicon: 'img/clear_iso.png',
 
   // Set the production url of your site here
   url: 'https://nanoservices.io',
@@ -72,7 +72,7 @@ const config = {
         title: 'Nanoservices',
         logo: {
           alt: 'Nanoservices Logo',
-          src: 'img/iso_logo.png', // this is a crop
+          src: 'img/clear_iso.png', // this is a crop
         },
         items: [
           {
