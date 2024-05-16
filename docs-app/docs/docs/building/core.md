@@ -1,6 +1,8 @@
 # Defining the Core
 
-The `core` is the heart of the nanoservice. This contains the business logic and the main functionality of the nanoservice. In our example, we will be creating a simple calculator that can do basic arithmetic operations. If we examine the `core` folder, we will see the following structure:
+The `core` is the heart of a nanoservice and contains the main functionality (business logic) of the nanoservice.
+In our example, we will are creating a calculator that can perform basic arithmetic operations.
+If we examine the `core` folder, we will see the following structure:
 
 ```plaintext
 core
@@ -9,7 +11,7 @@ core
     └── lib.rs
 ```
 
-As the program grows you will tend to structure your program over multiple files, however, for the example, we will keep everything in `lib.rs`. The `lib.rs` file will contain the following code:
+As the program grows you will tend to structure your program over multiple files; however, for the purposes of demonstration, we will keep everything in `lib.rs` which contains the following code:
 
 ```rust
 use nanoservices_utils::errors::{NanoServiceError, NanoServiceErrorStatus};
@@ -44,5 +46,5 @@ pub async fn handle_contract_echo(mut contract: Echo) -> Result<Echo, NanoServic
 }
 ```
 
-Seeing as the functions are public, another program can compile the `core` as a dependency and directly call these functions. To see this in action,
-we can move onto the servers.
+Seeing as the functions are public, another program can reference the `core` as a dependency and then directly call these functions.
+To see this in action, we can move onto the servers.

@@ -1,6 +1,11 @@
 # Packaging
 
-Because the package manager is built on top of Docker, packaging your nanoservice is as simple as building against the
-`Dockerfile` provided in the root of the nanoservice, tagging it, and pushing it to whatever resigtry you are using.
-If you want to complete this example without doing this, do not worry, we have this example already packaged and
-hosted on an open registry for you to use. We can cover how to install our nanoservice in the next section.
+Because the package manager is built on top of Docker, packaging your nanoservice amounts to following these simple steps:
+
+* Build the `Dockerfile` described in the root of the nanoservice
+* Tagging that `Docketfile`
+* Push the `Dockerfile` to whichever resigtry you prefer
+
+If you want to complete this example without doing all of this, do not worry; This example has already been packaged and
+hosted on an open registry readu for you to use.
+In the next section, we cover how to install this nanoservice.
