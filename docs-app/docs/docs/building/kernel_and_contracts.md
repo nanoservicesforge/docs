@@ -1,16 +1,16 @@
 # Kernel and Data Contracts
 
-A data contract is a struct that is used to communicate through two boundaries. The term Kernel is heavily used in domain driven design where a kernel is
-any entity that acts as a bridge between two domains. Because the ecosystem of nanoservices is focused on smoothing out how multiple Rust servers play with
-each other, our kernel is compiled into two Rust entities that want to communicate with each other. If one entity compiles another entity into its binary,
-then the kernel is merely housing the structs. However, if the two entities are separate binaries, then the kernel's structs are then serialised and sent over
-the network. Because both entitlies have the same structs from the same kernel, then the deserialisation process is seamless, and the kernel acts as a compilation
-bridge between the two entities, allowing the rust compiler to still perform its type checking.
+A data contract is a struct designed to allow communication over some two boundary.
+The term "Kernel" is heavily used in domain driven design and refers to any entity that acts as a bridge between two domains.
+Because the nanoservice ecosystem is focused on ensuring that multiple Rust servers play with nicely each other, we will build our kernel as a pair of Rust entities that communicate with each other.
+If one entity compiles another entity into its binary, then the kernel is merely housing the structs.
+However, if the two entities are separate binaries, then the kernel's structs must be serialised and sent over the network.
+Because both entities share the same structs, the deserialisation process is seamless, and the rust compiler performs its type checking across a commen set of structs.
 
-Because the same contract is sent back and fourth between the client and server, the contract must house both the incoming and outgoing data. The incoming
-and outgoing data does not have to be housed at the same time, both ingoing and outgoing fields can be `Option<T>`.
+Because the same contract is sent back and fourth between the client and server, the contract must act as a carrier for both the incoming and outgoing data.
+Since it does not make sense to send both incoming and outgoing data at the same time, the respective fields arte typically of type `Option<T>`.
 
-In the `kernel` workspace, we have a `lib.rs` file that contains the contracts. 
+In the `kernel` workspace, we have a `lib.rs` file that contains the contracts.
 
 ```rust
 use futures::{sink::SinkExt, StreamExt};
@@ -57,5 +57,7 @@ create_contract_handler!(
 );
 ```
 
-This essentially binds the `TestContractHandler` struct to the contracts, therefore, we can now use the `TestContractHandler` struct to either serialise or deserialise the contracts. We can also pass the `TestContractHandler` struct into other macros to bind functions to the contracts for route handling or
-another macro for sending the contract over the network. Now that we have our kernel, we can explore the `core`.
+This essentially binds the `TestContractHandler` struct to the contracts; therefore, we can now use the `TestContractHandler` struct both for serialisation and deserialisation of the contracts.
+We can also pass the `TestContractHandler` struct into macros that bind functions to the contracts for the purposes of route handling, or sending the contract over the network.
+
+Now that we have our kernel, we can explore the `core`.
