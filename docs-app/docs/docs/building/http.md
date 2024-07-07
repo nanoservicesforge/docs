@@ -1,6 +1,8 @@
 # Servers
 
-In this section, we are going to cover how to run a nanoservice as an HTTP server. This is a common way to run a nanoservice. The nanoservice will be running as a server and will be listening on a specific port for incoming requests. In the first example, we will be using the `actix-web` framework to create an HTTP server, and in the second example, we will be using the `axum` framework. We include both examples to show you how to run a nanoservice using different frameworks, and to emphasize that the nanoservice is not tied to a specific framework or protocol. 
+In this section, we will cover what is probably the most common way to run a nanoservice &mdash; from within an HTTP server that listens on a specific port for incoming requests.
+In the first example, we will be using the `actix-web` framework to create an HTTP server, and in the second example, we will be using the `axum` framework.
+Both examples are included here to show you that nanoservice are both framework and protocol agnostic.
 
 Each framework has an example workspace in the template, with the following files:
 
@@ -25,13 +27,14 @@ kernel = { path = "../../kernel" }
 core = { path = "../../core" }
 ```
 
-The `src/routing.rs` file contains the routing logic for the server. It imports the `actix-web` crate and the `nanoservices_utils` crate, and then the kernel and core crates. 
+The `src/routing.rs` file contains the routing logic for the server.
+It imports the `actix-web` crate and the `nanoservices_utils` crate, and then the kernel and core crates.
 
 ```rust
 
 use nanoservices_utils::errors::NanoServiceError;
 use actix_web::{
-    HttpResponse, 
+    HttpResponse,
     web::{Json, ServiceConfig, post, scope, get}
 };
 use kernel::{CalcWork, Echo};
@@ -41,7 +44,9 @@ use core::{
 };
 ```
 
-We then write two simple wrapper functions that handle the contract work and the contract echo. These functions are called by the Actix server when a request is made to the server. Note that they return a `Result` type, with the `Ok` variant returning an `HttpResponse` and the `Err` variant returning a `NanoServiceError`. 
+We then write two simple wrapper functions that handle the contract work and the contract echo.
+These functions are called by the Actix server when a request is received.
+Note that they return a `Result` type, with the `Ok` variant returning an `HttpResponse` and the `Err` variant returning a `NanoServiceError`.
 
 ```rust
 /// HTTP wrapper for the Actix web framework to handle the contract work.
@@ -60,7 +65,7 @@ pub async fn contract_echo(contract: Json<Echo>) -> Result<HttpResponse, NanoSer
 }
 ```
 
-Finally we create a function that binds the endpoints to an Actix Server. This function is called by the Actix server when it starts up. 
+Finally, we create a function that configures the Actix server to respond to requests arriving on these particular endpoints:
 
 ```rust
 
@@ -76,16 +81,17 @@ pub fn endpoints_factory(app: &mut ServiceConfig) {
 }
 ```
 
-The `main.rs` file imports the `routing` module and the `actix-web` crate, and then creates the Actix server. 
+The `main.rs` file imports the `routing` module and the `actix-web` crate, then creates the Actix server.
 
 
 ## Axum
+
 For the `axum` example, we need to add the following dependencies to the `Cargo.toml` file:
 
 ```toml
 [dependencies]
 axum = { version = "0.7.5", features = [] }
-tracing-subscriber = "0.3.18" 
+tracing-subscriber = "0.3.18"
 env_logger = "0.11.3"
 serde = { version = "1.0.200", features = ["derive"] }
 serde_json = "1.0.108"
@@ -95,7 +101,9 @@ kernel = { path = "../../kernel" }
 core = { path = "../../core" }
 ```
 
-This has the same structure as the `actix-web` example, with the following files, and the same logic in the `routing.rs` file. We create our two wrapper functions that handle the contract work and the contract echo. Notice this time we are using the `Json` macro to extract the contract from the request, and returning a tuple with the `StatusCode` and the `Json` contract. 
+The structure of the `axum` server is very similar to the `actix-web` example, with the same logic in the `routing.rs` file.
+We create our two wrapper functions that handle the contract work and the contract echo.
+Notice that this time, we are first using the `Json` macro to extract the contract from the request, then we return a tuple containing the `StatusCode` and the `Json` contract.
 
 ```rust
 async fn contract_work(Json(contract): Json<CalcWork>) -> (StatusCode, Json<CalcWork>) {
@@ -111,13 +119,13 @@ async fn contract_echo(Json(contract): Json<Echo>) -> (StatusCode, Json<Echo>) {
 }
 ```
 
-Then we create a function that binds the endpoints to an Axum Server. 
+Similarly, we create a function that configures the Axum server to respond to requests arriving on these particular endpoints:
 
 ```rust
 /// binds the endpoints to an Axum Server
 pub fn endpoints_factory() -> Router {
     Router::new()
-        .nest("/api/v1", 
+        .nest("/api/v1",
             axum::Router::new()
                 .route("/calc", get(contract_work))
                 .route("/calc", post(contract_work))
@@ -129,4 +137,4 @@ pub fn endpoints_factory() -> Router {
 
 ## TCP
 
-To run a TCP server using tokio you can visit the [TCP Messaging](/docs/docs/iomessaging/receiving-messages) documentation.
+To run a TCP server using tokio, you can visit the [TCP Messaging](/docs/docs/iomessaging/receiving-messages) documentation.
